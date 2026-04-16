@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3          # This tells K8s to ALWAYS keep 3 copies running
+  selector:
+    matchLabels:
+      app: my-web-app
+  template:            # This section is essentially your Pod blueprint from earlier
+    metadata:
+      labels:
+        app: my-web-app
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
